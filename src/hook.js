@@ -1,8 +1,8 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useRecoilState} from 'recoil'
 import {scaleState} from './atoms'
 
-const useUpdate = () => {
+export const useUpdate = () => {
     const [dir, setDir] = useState(1)
     const [scale, setScale] = useRecoilState(scaleState)
     const [animated, setAnimated] = useState(false)
@@ -12,7 +12,7 @@ const useUpdate = () => {
                 setAnimated(true)
                 let currScale = 0
                 const interval = setInterval(() => {
-                    curScale += 0.02 * dir
+                    currScale += 0.02 * dir
                     setScale(currScale)
                     if (Math.abs(currScale - scale) > 1) {
                         setScale(scale + dir)
@@ -23,5 +23,25 @@ const useUpdate = () => {
                 }, 20)
             }
         }
+    }
+}
+
+export const useDimension = () => {
+    const [w, setW] = useState(window.innerWidth)
+    const [h, setH] = useState(window.innerHeight)
+    useEffect(() => {
+        window.onresize = () => {
+            setW(window.innerWidth)
+            setH(window.innerHeight)
+        }
+        return () => {
+            window.onresize = () => {
+
+            }
+        }
+    })
+    return {
+        w,
+        h
     }
 }

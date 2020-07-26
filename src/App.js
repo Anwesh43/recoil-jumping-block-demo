@@ -1,25 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import {useDimension} from './hook'
+import JumpingBlock from './JumpingBlock'
+import {RecoilRoot} from 'recoil'
 function App() {
+  const {w, h} = useDimension()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RecoilRoot>
+        <JumpingBlock w = {w} h = {h}/>
+    </RecoilRoot>
   );
 }
 

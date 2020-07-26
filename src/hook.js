@@ -10,7 +10,7 @@ export const useUpdate = () => {
         start() {
             if (!animated) {
                 setAnimated(true)
-                let currScale = 0
+                let currScale = scale
                 const interval = setInterval(() => {
                     currScale += 0.02 * dir
                     setScale(currScale)
